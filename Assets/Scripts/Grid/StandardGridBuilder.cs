@@ -41,10 +41,12 @@ namespace GridGame {
       GameObject building = GameObject.Instantiate(grid.castlePrefab, new Vector3(0, 0, -1f), Quaternion.identity);
       building.transform.parent = grid.transform;
       building.name = grid.castlePrefab.name;
+      grid.buildings.Add(building);
       //Spawn opponent's building.
       building = GameObject.Instantiate(grid.castlePrefab, new Vector3(gridWidth-1, gridHeight-1, -1f), Quaternion.identity);
       building.transform.parent = grid.transform;
       building.name = grid.castlePrefab.name; // Get rid of the annoying (clone) at the end of instantiated object's name
+      grid.buildings.Add(building);
     }
   }
 }

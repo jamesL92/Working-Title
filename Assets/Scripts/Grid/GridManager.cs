@@ -6,11 +6,15 @@ namespace GridGame {
 	public class GridManager : MonoBehaviour {
 
     //Prefab References
-    [SerializeField] public GameObject walkableTilePrefab;
-    [SerializeField] public GameObject unwalkableTilePrefab;
-    [SerializeField] public GameObject castlePrefab;
+    public GameObject walkableTilePrefab;
+    public GameObject unwalkableTilePrefab;
+    public GameObject castlePrefab;
+
+		public List<GameObject> buildings = new List<GameObject>();
 
 		GridBuilder builder;
+
+
 		void Awake() {
 			builder = new StandardGridBuilder(this);
 			builder.GenerateMap();
