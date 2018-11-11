@@ -11,5 +11,6 @@ namespace GridGame {
     }
     public abstract void GenerateMap();
     public abstract void SpawnBuildings();
+    public abstract void SpawnUnits();
   }
 }

@@ -206,6 +206,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &249768473
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4185243166778880, guid: 38452e099c87e9d49ad1c27b9fc6e5b9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185243166778880, guid: 38452e099c87e9d49ad1c27b9fc6e5b9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185243166778880, guid: 38452e099c87e9d49ad1c27b9fc6e5b9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185243166778880, guid: 38452e099c87e9d49ad1c27b9fc6e5b9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185243166778880, guid: 38452e099c87e9d49ad1c27b9fc6e5b9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185243166778880, guid: 38452e099c87e9d49ad1c27b9fc6e5b9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185243166778880, guid: 38452e099c87e9d49ad1c27b9fc6e5b9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185243166778880, guid: 38452e099c87e9d49ad1c27b9fc6e5b9, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 38452e099c87e9d49ad1c27b9fc6e5b9, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &306170369
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +281,7 @@ MonoBehaviour:
     type: 2}
   castlePrefab: {fileID: 1822824833861060, guid: d213ace9529ca61408b6c150021c3a62,
     type: 2}
+  buildings: []
 --- !u!4 &306170371
 Transform:
   m_ObjectHideFlags: 0

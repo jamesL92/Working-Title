@@ -38,7 +38,7 @@ namespace GridGame {
 
     public override void SpawnBuildings() {
       //Spawn human player's building.
-      GameObject building = GameObject.Instantiate(grid.castlePrefab, new Vector3(0, 0, -1f), Quaternion.identity);
+      GameObject building = GameObject.Instantiate(grid.castlePrefab, Vector3.zero, Quaternion.identity);
       building.transform.parent = grid.transform;
       building.name = grid.castlePrefab.name;
       grid.buildings.Add(building);
@@ -47,6 +47,19 @@ namespace GridGame {
       building.transform.parent = grid.transform;
       building.name = grid.castlePrefab.name; // Get rid of the annoying (clone) at the end of instantiated object's name
       grid.buildings.Add(building);
+    }
+
+    public override void SpawnUnits() {
+      //Spawn human player's building.
+      GameObject unit = GameObject.Instantiate(grid.unitPrefab, new Vector3(1f,1f,0), Quaternion.identity);
+      unit.transform.parent = grid.transform;
+      unit.name = grid.unitPrefab.name;
+      grid.units.Add(unit);
+      //Spawn opponent's unit.
+      unit = GameObject.Instantiate(grid.unitPrefab, new Vector3(gridWidth-2, gridHeight-2, 0), Quaternion.identity);
+      unit.transform.parent = grid.transform;
+      unit.name = grid.unitPrefab.name; // Get rid of the annoying (clone) at the end of instantiated object's name
+      grid.units.Add(unit);
     }
   }
 }
