@@ -6,39 +6,26 @@ using GridGame;
 
 namespace Working_Title.Assets.Scripts
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : MonoSingleton<GameManager>
     {
-        public static GameManager instance = null;
         private Player currentPlayer = null;
         private GameObject gridManager;
         private Queue<Player> playerQueue = new Queue<Player>();
 
-        void Awake()
-        {
-            // Enforce singleton
-            if (instance == null) instance = this;
-            else if (instance != this) Destroy(gameObject);
-            
-            DontDestroyOnLoad(gameObject);
+        //Event for when the turn changes.
+        public delegate void TurnStartAction(Player currentPlayer);
+        public event TurnStartAction onTurnStart;
 
+        protected override void Awake()
+        {
+            base.Awake();
             // Initialize the game with two human players
             InitGame(2, 0);
         }
         void InitGame(int numHumanPlayers, int numAIPlayers){
-            
             // Should we also singleton the gridManager?  Guessing we only want one in a game right?
             Instantiate(gridManager);
-
-            // Create human players
-            for(int i=0; i < numHumanPlayers; i++){
-                playerQueue.Enqueue(new Player(new HumanInterface()));
-            }
-
-            // Create AI players
-            for(int i=0; i < numAIPlayers; i++){
-                playerQueue.Enqueue(new Player(new AIInterface()));
-            }
-
+            CreatePlayers(numHumanPlayers, numAIPlayers);
             // Trigger the first turn
             TriggerNextTurn();
         }
@@ -56,11 +43,29 @@ namespace Working_Title.Assets.Scripts
                 }
                 currentPlayer = playerQueue.Dequeue();
                 currentPlayer.StartTurn();
+
+                //Fire an event when the turn has started.
+                if(onTurnStart != null) {
+                    onTurnStart(currentPlayer);
+                }
             }
             else {
                 // Handle game over, unless we want to just handle it in CheckGameOver?
                 Debug.Log("Game over");
             }
+        }
+
+        void CreatePlayers(int numHumanPlayers, int numAIPlayers) {
+            // Create human players
+            for(int i=0; i < numHumanPlayers; i++){
+                playerQueue.Enqueue(new Player(new HumanInterface()));
+            }
+
+            // Create AI players
+            for(int i=0; i < numAIPlayers; i++){
+                playerQueue.Enqueue(new Player(new AIInterface()));
+            }
+
         }
 
     }
