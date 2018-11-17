@@ -15,6 +15,8 @@ namespace Working_Title.Assets.Scripts
         public delegate void TurnStartAction(Player currentPlayer);
         public event TurnStartAction onTurnStart;
 
+        public int playerStartingGold;
+
         protected override void Awake()
         {
             base.Awake();
@@ -65,6 +67,7 @@ namespace Working_Title.Assets.Scripts
 
         void CreatePlayer(PlayerInterface _interface) {
             Player playerToAdd = new Player(_interface);
+            playerToAdd.gold = playerStartingGold;
             playerQueue.Enqueue(playerToAdd);
         }
 
