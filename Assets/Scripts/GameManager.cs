@@ -55,14 +55,17 @@ namespace Working_Title.Assets.Scripts
         void CreatePlayers(int numHumanPlayers, int numAIPlayers) {
             // Create human players
             for(int i=0; i < numHumanPlayers; i++){
-                playerQueue.Enqueue(new Player(new HumanInterface()));
+                CreatePlayer(new HumanInterface());
             }
-
             // Create AI players
             for(int i=0; i < numAIPlayers; i++){
-                playerQueue.Enqueue(new Player(new AIInterface()));
+                CreatePlayer(new AIInterface());
             }
+        }
 
+        void CreatePlayer(PlayerInterface _interface) {
+            Player playerToAdd = new Player(_interface);
+            playerQueue.Enqueue(playerToAdd);
         }
 
     }
