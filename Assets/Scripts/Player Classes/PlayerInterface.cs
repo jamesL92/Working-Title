@@ -1,18 +1,18 @@
 namespace PlayerClasses
 {
-    public class PlayerInterface
+    public class IPlayerInterface
     {
         public void StartTurn(){
 
         }
     }
 
-    public class HumanInterface : PlayerInterface
+    public class HumanInterface : IPlayerInterface
     {
 
     }
 
-    public class AIInterface : PlayerInterface
+    public class AIInterface : IPlayerInterface
     {
 
     }

@@ -2,14 +2,15 @@ namespace PlayerClasses
 {
     public class Player
     {
-        private PlayerInterface pInterface;
+        private IPlayerInterface pInterface;
         public int gold;
-        public Player(PlayerInterface pInterface){
+        public Player(IPlayerInterface pInterface){
             this.pInterface = pInterface;
         }
 
         public void StartTurn(){
             pInterface.StartTurn();
         }
+
     }
 }

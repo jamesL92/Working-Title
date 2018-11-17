@@ -68,7 +68,7 @@ namespace Working_Title.Assets.Scripts
             }
         }
 
-        void CreatePlayer(PlayerInterface _interface) {
+        void CreatePlayer(IPlayerInterface _interface) {
             Player playerToAdd = new Player(_interface);
             playerToAdd.gold = playerStartingGold;
             playerQueue.Enqueue(playerToAdd);
