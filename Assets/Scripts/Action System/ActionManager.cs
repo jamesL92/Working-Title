@@ -13,6 +13,11 @@ namespace ActionSystem {
       factory = new ActionFactory(this);
     }
 
+    void Update() {
+      if(Input.GetKeyUp(KeyCode.Backspace))
+        UndoLastAction();
+    }
+
     public void AddAction(string type) {
       try {
 
