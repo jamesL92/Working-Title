@@ -1,20 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public abstract class MonoSingleton<T> : MonoBehaviour where T:MonoBehaviour {
+namespace UnityEngine {
+	public abstract class MonoSingleton<T> : MonoBehaviour where T:MonoBehaviour {
 
-	public static T instance;
+		public static T instance;
 
-	protected virtual void Awake() {
-		// Enforce singleton
-		if (instance == null) instance = this as T;
-		else Destroy(gameObject);
+		protected virtual void Awake() {
+			// Enforce singleton
+			if (instance == null) instance = this as T;
+			else Destroy(gameObject);
 
-		DontDestroyOnLoad(gameObject);
-	}
+			DontDestroyOnLoad(gameObject);
+		}
 
-	void OnApplicationQuit() {
-		instance = null;
+		void OnApplicationQuit() {
+			instance = null;
+		}
 	}
 }
