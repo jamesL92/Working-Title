@@ -1,3 +1,5 @@
-public enum ActionType {
-  GAIN_GOLD,
-};
+namespace ActionSystem {
+  public enum ActionType {
+    GAIN_GOLD,
+  };
+}

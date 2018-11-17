@@ -8,7 +8,10 @@ namespace Working_Title.Assets.Scripts
 {
     public class GameManager : MonoSingleton<GameManager>
     {
-        private Player currentPlayer = null;
+        public Player currentPlayer {
+            get;
+            private set;
+        }
         private Queue<Player> playerQueue = new Queue<Player>();
 
         //Event for when the turn changes.
