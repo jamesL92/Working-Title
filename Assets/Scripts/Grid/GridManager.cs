@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace GridGame {
-	public class GridManager : MonoBehaviour {
+	public class GridManager : MonoSingleton<GridManager> {
     //Prefab References
     public GameObject walkableTilePrefab;
     public GameObject unwalkableTilePrefab;
@@ -16,7 +16,8 @@ namespace GridGame {
 		GridBuilder builder;
 
 
-		void Awake() {
+		protected override void Awake() {
+			base.Awake();
 			builder = new StandardGridBuilder(this);
 			builder.GenerateMap();
 			builder.SpawnBuildings();

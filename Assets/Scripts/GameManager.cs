@@ -9,7 +9,6 @@ namespace Working_Title.Assets.Scripts
     public class GameManager : MonoSingleton<GameManager>
     {
         private Player currentPlayer = null;
-        private GameObject gridManager;
         private Queue<Player> playerQueue = new Queue<Player>();
 
         //Event for when the turn changes.
@@ -23,8 +22,6 @@ namespace Working_Title.Assets.Scripts
             InitGame(2, 0);
         }
         void InitGame(int numHumanPlayers, int numAIPlayers){
-            // Should we also singleton the gridManager?  Guessing we only want one in a game right?
-            Instantiate(gridManager);
             CreatePlayers(numHumanPlayers, numAIPlayers);
             // Trigger the first turn
             TriggerNextTurn();
@@ -35,7 +32,7 @@ namespace Working_Title.Assets.Scripts
             return false;
         }
 
-        void TriggerNextTurn(){
+        public void TriggerNextTurn(){
             if(!CheckGameOver()){
                 if (currentPlayer != null){
                     // Add current player to the end of the queue if this isn't the first turn
