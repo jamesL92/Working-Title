@@ -13,7 +13,11 @@ namespace Working_Title.Assets.Scripts
             private set;
         }
         private Queue<Player> playerQueue = new Queue<Player>();
-
+        //TODO: remove this - currently the standard grid builder script
+        // relies on this, but in an ideal world it shouldn't be needed.
+        public Player[] allPlayers {
+            get { return playerQueue.ToArray(); }
+        }
         //Event for when the turn changes.
         public delegate void TurnStartAction(Player currentPlayer);
         public event TurnStartAction onTurnStart;
@@ -39,11 +43,9 @@ namespace Working_Title.Assets.Scripts
 
         public void TriggerNextTurn(){
             if(!CheckGameOver()){
-                if (currentPlayer != null){
-                    // Add current player to the end of the queue if this isn't the first turn
-                    playerQueue.Enqueue(currentPlayer);
-                }
                 currentPlayer = playerQueue.Dequeue();
+                // Add current player to the end of the queue if this isn't the first turn
+                playerQueue.Enqueue(currentPlayer);
                 currentPlayer.StartTurn();
 
                 //Fire an event when the turn has started.

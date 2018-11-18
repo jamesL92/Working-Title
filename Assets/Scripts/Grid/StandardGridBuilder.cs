@@ -1,6 +1,6 @@
 using UnityEngine;
 using System;
-
+using Working_Title.Assets.Scripts;
 namespace GridGame {
   [Serializable]
   public class StandardGridBuilder: GridBuilder {
@@ -34,13 +34,15 @@ namespace GridGame {
     }
 
     public override void SpawnBuildings() {
-      grid.AddOccupier(new Building(new Coordinate(0,0)));
-      grid.AddOccupier(new Building(new Coordinate(gridWidth-1,gridHeight-1)));
+      //TODO: refactor this to uncouple from how players are built.
+      grid.AddOccupier(new Building(new Coordinate(0,0), GameManager.instance.allPlayers[0]));
+      grid.AddOccupier(new Building(new Coordinate(gridWidth-1,gridHeight-1), GameManager.instance.allPlayers[1]));
     }
 
     public override void SpawnUnits() {
-      grid.AddOccupier(new Unit(new Coordinate(1,1)));
-      grid.AddOccupier(new Unit(new Coordinate(gridWidth-2,gridHeight-2)));
+      //TODO: refactor this to uncouple from how players are built.
+      grid.AddOccupier(new Unit(new Coordinate(1,1), GameManager.instance.allPlayers[0]));
+      grid.AddOccupier(new Unit(new Coordinate(gridWidth-2,gridHeight-2), GameManager.instance.allPlayers[1]));
     }
   }
 }
