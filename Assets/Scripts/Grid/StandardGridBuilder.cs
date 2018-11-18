@@ -17,21 +17,18 @@ namespace GridGame {
     public override void GenerateMap() {
       for(int x=0; x<gridWidth; x++) {
         for(int y=0; y<gridHeight; y++) {
-
-          GameObject tileToSpawn;
+          Tile tileToSpawn;
           //Choose tile to instantiate.
           if(
             (x < initialWalkableSquareSize && y < initialWalkableSquareSize) ||
             (x >= gridWidth - initialWalkableSquareSize && y >= gridHeight - initialWalkableSquareSize)
           ) {
-            tileToSpawn = PrefabManager.instance.walkableTilePrefab;
+            tileToSpawn = new WalkableTile(new Coordinate(x,y));
           } else
-            tileToSpawn = PrefabManager.instance.unwalkableTilePrefab;
+            tileToSpawn = new UnwalkableTile(new Coordinate(x,y));
 
-          // Spawn the tile
-          GameObject spawnedTile = GameObject.Instantiate(tileToSpawn, new Vector3( x, y, 0f ), Quaternion.identity) as GameObject;
-          spawnedTile.transform.parent = grid.transform;
-          spawnedTile.name = tileToSpawn.name; // Get rid of the annoying (clone) at the end of instantiated object's name
+          // Add tile to the grid.
+          GridManager.instance.AddTile(tileToSpawn);
         }
       }
     }
