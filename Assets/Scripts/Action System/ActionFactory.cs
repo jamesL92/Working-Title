@@ -12,6 +12,8 @@ namespace ActionSystem {
       switch(actionType) {
         case ActionType.GAIN_GOLD:
           return new GainGoldAction(player);
+        case ActionType.BUILD_TILES:
+          return new BuildTilesAction(player);
         default:
           return null;
       }

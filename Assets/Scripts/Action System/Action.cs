@@ -1,6 +1,6 @@
 using System.Collections;
 using PlayerClasses;
-
+using UnityEngine;
 namespace ActionSystem {
   public abstract class Action {
 
@@ -30,6 +30,28 @@ namespace ActionSystem {
     public override void Undo() {
       if(performed) {
         player.gold--;
+        performed = false;
+      }
+    }
+  }
+
+  public class BuildTilesAction: Action {
+
+    private bool performed;
+
+    public BuildTilesAction(Player player): base(player) {}
+
+    public override IEnumerator Perform() {
+      if(!performed){
+        Debug.Log("Building Tiles");
+        performed = true;
+        yield return null;
+      }
+    }
+
+    public override void Undo() {
+      if(performed) {
+        Debug.Log("Undoing Built Tiles");
         performed = false;
       }
     }
