@@ -233,13 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63b8110f7843094bb51f30a147ebc03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkableTilePrefab: {fileID: 1963121232507362, guid: e87791d1da5ea5545849da89b93cc38e,
-    type: 2}
-  unwalkableTilePrefab: {fileID: 1837205432200124, guid: a9071b1bd4970bc42bb0934ca7b38df8,
-    type: 2}
-  castlePrefab: {fileID: 1822824833861060, guid: d213ace9529ca61408b6c150021c3a62,
-    type: 2}
-  unitPrefab: {fileID: 1816852433909050, guid: 38452e099c87e9d49ad1c27b9fc6e5b9, type: 2}
   buildings: []
   units: []
 --- !u!4 &306170371
@@ -986,3 +979,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d932683b0591448b286f335b46d33c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2022334746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2022334748}
+  - component: {fileID: 2022334747}
+  m_Layer: 0
+  m_Name: Prefab Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2022334747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2022334746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a847bfea6f4ec9c499050158e7034872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkableTilePrefab: {fileID: 1963121232507362, guid: e87791d1da5ea5545849da89b93cc38e,
+    type: 2}
+  unwalkableTilePrefab: {fileID: 1837205432200124, guid: a9071b1bd4970bc42bb0934ca7b38df8,
+    type: 2}
+  castlePrefab: {fileID: 1822824833861060, guid: d213ace9529ca61408b6c150021c3a62,
+    type: 2}
+  unitPrefab: {fileID: 1816852433909050, guid: 38452e099c87e9d49ad1c27b9fc6e5b9, type: 2}
+--- !u!4 &2022334748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2022334746}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

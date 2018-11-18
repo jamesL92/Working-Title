@@ -24,9 +24,9 @@ namespace GridGame {
             (x < initialWalkableSquareSize && y < initialWalkableSquareSize) ||
             (x >= gridWidth - initialWalkableSquareSize && y >= gridHeight - initialWalkableSquareSize)
           ) {
-            tileToSpawn = grid.walkableTilePrefab;
+            tileToSpawn = PrefabManager.instance.walkableTilePrefab;
           } else
-            tileToSpawn = grid.unwalkableTilePrefab;
+            tileToSpawn = PrefabManager.instance.unwalkableTilePrefab;
 
           // Spawn the tile
           GameObject spawnedTile = GameObject.Instantiate(tileToSpawn, new Vector3( x, y, 0f ), Quaternion.identity) as GameObject;
@@ -38,27 +38,27 @@ namespace GridGame {
 
     public override void SpawnBuildings() {
       //Spawn human player's building.
-      GameObject building = GameObject.Instantiate(grid.castlePrefab, Vector3.zero, Quaternion.identity);
+      GameObject building = GameObject.Instantiate(PrefabManager.instance.castlePrefab, Vector3.zero, Quaternion.identity);
       building.transform.parent = grid.transform;
-      building.name = grid.castlePrefab.name;
+      building.name = PrefabManager.instance.castlePrefab.name;
       grid.buildings.Add(building);
       //Spawn opponent's building.
-      building = GameObject.Instantiate(grid.castlePrefab, new Vector3(gridWidth-1, gridHeight-1, -1f), Quaternion.identity);
+      building = GameObject.Instantiate(PrefabManager.instance.castlePrefab, new Vector3(gridWidth-1, gridHeight-1, -1f), Quaternion.identity);
       building.transform.parent = grid.transform;
-      building.name = grid.castlePrefab.name; // Get rid of the annoying (clone) at the end of instantiated object's name
+      building.name = PrefabManager.instance.castlePrefab.name; // Get rid of the annoying (clone) at the end of instantiated object's name
       grid.buildings.Add(building);
     }
 
     public override void SpawnUnits() {
       //Spawn human player's building.
-      GameObject unit = GameObject.Instantiate(grid.unitPrefab, new Vector3(1f,1f,0), Quaternion.identity);
+      GameObject unit = GameObject.Instantiate(PrefabManager.instance.unitPrefab, new Vector3(1f,1f,0), Quaternion.identity);
       unit.transform.parent = grid.transform;
-      unit.name = grid.unitPrefab.name;
+      unit.name = PrefabManager.instance.unitPrefab.name;
       grid.units.Add(unit);
       //Spawn opponent's unit.
-      unit = GameObject.Instantiate(grid.unitPrefab, new Vector3(gridWidth-2, gridHeight-2, 0), Quaternion.identity);
+      unit = GameObject.Instantiate(PrefabManager.instance.unitPrefab, new Vector3(gridWidth-2, gridHeight-2, 0), Quaternion.identity);
       unit.transform.parent = grid.transform;
-      unit.name = grid.unitPrefab.name; // Get rid of the annoying (clone) at the end of instantiated object's name
+      unit.name = PrefabManager.instance.unitPrefab.name; // Get rid of the annoying (clone) at the end of instantiated object's name
       grid.units.Add(unit);
     }
   }
