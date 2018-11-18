@@ -34,29 +34,13 @@ namespace GridGame {
     }
 
     public override void SpawnBuildings() {
-      //Spawn human player's building.
-      GameObject building = GameObject.Instantiate(PrefabManager.instance.castlePrefab, Vector3.zero, Quaternion.identity);
-      building.transform.parent = grid.transform;
-      building.name = PrefabManager.instance.castlePrefab.name;
-      grid.buildings.Add(building);
-      //Spawn opponent's building.
-      building = GameObject.Instantiate(PrefabManager.instance.castlePrefab, new Vector3(gridWidth-1, gridHeight-1, -1f), Quaternion.identity);
-      building.transform.parent = grid.transform;
-      building.name = PrefabManager.instance.castlePrefab.name; // Get rid of the annoying (clone) at the end of instantiated object's name
-      grid.buildings.Add(building);
+      grid.AddOccupier(new Building(new Coordinate(0,0)));
+      grid.AddOccupier(new Building(new Coordinate(gridWidth-1,gridHeight-1)));
     }
 
     public override void SpawnUnits() {
-      //Spawn human player's building.
-      GameObject unit = GameObject.Instantiate(PrefabManager.instance.unitPrefab, new Vector3(1f,1f,0), Quaternion.identity);
-      unit.transform.parent = grid.transform;
-      unit.name = PrefabManager.instance.unitPrefab.name;
-      grid.units.Add(unit);
-      //Spawn opponent's unit.
-      unit = GameObject.Instantiate(PrefabManager.instance.unitPrefab, new Vector3(gridWidth-2, gridHeight-2, 0), Quaternion.identity);
-      unit.transform.parent = grid.transform;
-      unit.name = PrefabManager.instance.unitPrefab.name; // Get rid of the annoying (clone) at the end of instantiated object's name
-      grid.units.Add(unit);
+      grid.AddOccupier(new Unit(new Coordinate(1,1)));
+      grid.AddOccupier(new Unit(new Coordinate(gridWidth-2,gridHeight-2)));
     }
   }
 }
