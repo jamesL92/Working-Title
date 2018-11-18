@@ -44,6 +44,18 @@ namespace GridGame {
 			}
 		}
 
+		public Tile GetTile(Coordinate tileLoc) {
+			/*
+			 Iterate through all tiles in the grid, if tile matches coordinates return it,
+			 otherwise return null.
+			*/
+			for (int i = 0; i < tiles.Count; i++) {
+				if (tiles[i].coordinate.x == tileLoc.x && tiles[i].coordinate.y == tileLoc.y)
+					return tiles[i];
+			}
+			return null;
+		}
+
 		public void AddOccupier(GridOccupier occupier) {
 			//Add an occupier to the grid.
 			//Space must be empty for it to be occupied.
