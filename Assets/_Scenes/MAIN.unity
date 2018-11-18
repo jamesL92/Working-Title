@@ -233,8 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63b8110f7843094bb51f30a147ebc03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildings: []
-  units: []
 --- !u!4 &306170371
 Transform:
   m_ObjectHideFlags: 0
@@ -539,6 +537,11 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114420210690880768, guid: 702a2d26c453aab4c80915a383f53b50,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224197194323509164, guid: 702a2d26c453aab4c80915a383f53b50,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -708,6 +711,36 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: GAIN_GOLD
+      objectReference: {fileID: 0}
+    - target: {fileID: 114420210690880768, guid: 702a2d26c453aab4c80915a383f53b50,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114420210690880768, guid: 702a2d26c453aab4c80915a383f53b50,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114420210690880768, guid: 702a2d26c453aab4c80915a383f53b50,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1064784673}
+    - target: {fileID: 114420210690880768, guid: 702a2d26c453aab4c80915a383f53b50,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AddAction
+      objectReference: {fileID: 0}
+    - target: {fileID: 114420210690880768, guid: 702a2d26c453aab4c80915a383f53b50,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114420210690880768, guid: 702a2d26c453aab4c80915a383f53b50,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: BUILD_TILES
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 702a2d26c453aab4c80915a383f53b50, type: 2}

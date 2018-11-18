@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PlayerClasses;
 
 namespace GridGame {
 	public class GridManager : MonoSingleton<GridManager> {
@@ -69,6 +70,40 @@ namespace GridGame {
 
 		public Vector3 CoordinateToWorldPos(Coordinate coordinate) {
 			return new Vector3(coordinate.x, coordinate.y, transform.position.z);
+		}
+
+		public Coordinate WorldPosToCoordinate(Vector3 worldPos) {
+			return new Coordinate(Mathf.RoundToInt(worldPos.x), Mathf.RoundToInt(worldPos.y));
+		}
+
+		public List<Coordinate> FloodFillForPlayer(Player player) {
+				List<Coordinate> allowedCoords = new List<Coordinate>();
+				List<Coordinate> disallowedCoords = new List<Coordinate>();
+				List<Coordinate> tilesToSearch = tiles.FindAll(tile => tile.walkable).ConvertAll(tile => tile.coordinate);
+
+				//Add to lists for each current occupier.
+				foreach(GridOccupier occupier in occupiers) {
+					if(occupier.owner == player) allowedCoords.Add(occupier.coordinate);
+					else disallowedCoords.Add(occupier.coordinate);
+					tilesToSearch.Remove(occupier.coordinate);
+				}
+
+				int coordinatesAdded;
+				//Iteratively check all tiles to see if they're a neighbour of a tile we've already found.
+				do {
+					coordinatesAdded = 0;
+					Coordinate[] tilesToSearchThisLoop = tilesToSearch.ToArray();
+						foreach(Coordinate coordinate in tilesToSearchThisLoop) {
+							int foundCoordinateIndex = allowedCoords.FindIndex(allowed => allowed.ManhattanDistance(coordinate) == 1);
+							if(foundCoordinateIndex > -1) {
+							// if(allowedCoords.Find(allowed => allowed.ManhattanDistance(coordinate) == 1) != null) {
+								allowedCoords.Add(coordinate);
+								tilesToSearch.Remove(coordinate);
+								coordinatesAdded++;
+							}
+						}
+				} while (coordinatesAdded > 0);
+				return allowedCoords;
 		}
 	}
 }
