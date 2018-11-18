@@ -38,7 +38,7 @@ namespace GridGame {
 			//Destroy the game object associated with that tile.
 			foreach(Transform tileObject in transform) {
 				//TODO: Find a way to only search for tiles.
-				if(tileObject.transform.position == CoordinateToWorldPos(tile.coordinate)) {
+				if(tileObject.transform.position == CoordinateToWorldPos(tile.coordinate) && tileObject.tag == "Tile") {
 					Destroy(tileObject.gameObject);
 				}
 			}
@@ -62,7 +62,7 @@ namespace GridGame {
 			occupiers.Remove(occupier);
 			foreach(Transform _occupier in transform) {
 			//TODO: Find a way to only search for other grid objects.
-				if(_occupier.transform.position == CoordinateToWorldPos(occupier.coordinate)) {
+				if(_occupier.transform.position == CoordinateToWorldPos(occupier.coordinate) && _occupier.tag == "GridObject") {
 					Destroy(_occupier.gameObject);
 				}
 			}

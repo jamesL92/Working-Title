@@ -530,7 +530,7 @@ Prefab:
     - target: {fileID: 114317406475418636, guid: 702a2d26c453aab4c80915a383f53b50,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114247564338073896, guid: 702a2d26c453aab4c80915a383f53b50,
         type: 2}
@@ -660,7 +660,7 @@ Prefab:
     - target: {fileID: 114317406475418636, guid: 702a2d26c453aab4c80915a383f53b50,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114317406475418636, guid: 702a2d26c453aab4c80915a383f53b50,
         type: 2}
@@ -671,11 +671,11 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1802799220}
+      objectReference: {fileID: 1064784673}
     - target: {fileID: 114317406475418636, guid: 702a2d26c453aab4c80915a383f53b50,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: AddAction
       objectReference: {fileID: 0}
     - target: {fileID: 114317406475418636, guid: 702a2d26c453aab4c80915a383f53b50,
         type: 2}
@@ -741,6 +741,11 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: BUILD_TILES
+      objectReference: {fileID: 0}
+    - target: {fileID: 114317406475418636, guid: 702a2d26c453aab4c80915a383f53b50,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: SPAWN_UNIT
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 702a2d26c453aab4c80915a383f53b50, type: 2}

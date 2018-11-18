@@ -14,6 +14,8 @@ namespace ActionSystem {
           return new GainGoldAction(player);
         case ActionType.BUILD_TILES:
           return new BuildTilesAction(player);
+        case ActionType.SPAWN_UNIT:
+          return new SpawnUnitAction(player);
         default:
           return null;
       }

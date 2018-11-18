@@ -26,12 +26,13 @@ namespace GridGame {
       prefab = PrefabManager.instance.castlePrefab;
     }
 
-    public bool SpawnUnit() {
+    public Unit SpawnUnit() {
       foreach(GridOccupier occupier in GridManager.instance.occupiers) {
-        if(occupier.coordinate == spawningCoordinate) return false;
+        if(occupier.coordinate == spawningCoordinate) return null;
       }
-      GridManager.instance.AddOccupier(new Unit(spawningCoordinate, owner));
-      return true;
+      Unit spawnedUnit = new Unit(spawningCoordinate, owner);
+      GridManager.instance.AddOccupier(spawnedUnit);
+      return spawnedUnit;
     }
   }
 }
