@@ -132,4 +132,32 @@ namespace ActionSystem {
       }
     }
   }
+
+  public class SpawnUnitAction: Action {
+
+    private int spawnUnitCost = 5;
+    private bool performed;
+    private Unit spawnedUnit;
+    public SpawnUnitAction(Player player): base(player) {}
+
+    public override IEnumerator Perform() {
+      if(player.gold < spawnUnitCost || performed) yield break;
+
+      Building building = (Building)GridManager.instance.occupiers
+                            .Find(occ => occ.owner == player && occ.GetType() == typeof(Building));
+      spawnedUnit = building.SpawnUnit();
+      if(spawnedUnit != null) {
+        player.gold -= spawnUnitCost;
+        performed = true;
+      }
+    }
+
+    public override void Undo() {
+      if(performed) {
+        GridManager.instance.RemoveOccupier(spawnedUnit);
+        player.gold += spawnUnitCost;
+        performed = false;
+      }
+    }
+  }
 }
