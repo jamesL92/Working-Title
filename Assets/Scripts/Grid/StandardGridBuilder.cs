@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 using Working_Title.Assets.Scripts;
 namespace GridGame {
   [Serializable]
@@ -35,14 +36,25 @@ namespace GridGame {
 
     public override void SpawnBuildings() {
       //TODO: refactor this to uncouple from how players are built.
-      grid.AddOccupier(new Building(new Coordinate(0,0), GameManager.instance.allPlayers[0]));
-      grid.AddOccupier(new Building(new Coordinate(gridWidth-1,gridHeight-1), GameManager.instance.allPlayers[1]));
+      Building building;
+
+      building = new Building(new Coordinate(0,0), GameManager.instance.allPlayers[1]);
+      building.spawningCoordinate = new Coordinate(1,1);
+      grid.AddOccupier(building);
+
+      building = new Building(new Coordinate(gridWidth-1,gridHeight-1), GameManager.instance.allPlayers[0]);
+      building.spawningCoordinate = new Coordinate(gridWidth-2,gridHeight-2);
+      grid.AddOccupier(building);
     }
 
     public override void SpawnUnits() {
       //TODO: refactor this to uncouple from how players are built.
-      grid.AddOccupier(new Unit(new Coordinate(1,1), GameManager.instance.allPlayers[0]));
-      grid.AddOccupier(new Unit(new Coordinate(gridWidth-2,gridHeight-2), GameManager.instance.allPlayers[1]));
+      List<Building> buildings = GridManager.instance.occupiers
+                                  .FindAll(occupier => occupier.GetType() == typeof(Building))
+                                  .ConvertAll(building => (Building)building);
+      foreach(Building building in buildings) {
+        building.SpawnUnit();
+      }
     }
   }
 }

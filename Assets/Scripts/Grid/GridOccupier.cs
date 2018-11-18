@@ -20,8 +20,18 @@ namespace GridGame {
   }
 
   public class Building: GridOccupier {
+    public Coordinate spawningCoordinate;
+
     public Building(Coordinate coordinate, Player owner): base(coordinate, owner) {
       prefab = PrefabManager.instance.castlePrefab;
+    }
+
+    public bool SpawnUnit() {
+      foreach(GridOccupier occupier in GridManager.instance.occupiers) {
+        if(occupier.coordinate == spawningCoordinate) return false;
+      }
+      GridManager.instance.AddOccupier(new Unit(spawningCoordinate, owner));
+      return true;
     }
   }
 }
