@@ -44,7 +44,7 @@ namespace GridGame {
 			}
 		}
 
-		public Tile GetTile(Coordinate tileLoc) {
+		public Tile GetTileFromCoord(Coordinate tileLoc) {
 			/*
 			 Iterate through all tiles in the grid, if tile matches coordinates return it,
 			 otherwise return null.
@@ -53,6 +53,20 @@ namespace GridGame {
 				if (tiles[i].coordinate.x == tileLoc.x && tiles[i].coordinate.y == tileLoc.y)
 					return tiles[i];
 			}
+			return null;
+		}
+
+		public Tile GetTileFromClick() {
+			// Layermask ignores all but the Tile layer
+            int layerMask = LayerMask.GetMask("Tile");
+            if(Input.GetMouseButtonDown(0)) {
+                RaycastHit hit;
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, layerMask)){
+                    // I could use the gridmanager helper function here to retrieve coords
+					Coordinate clickedCoordinate = instance.WorldPosToCoordinate(hit.point);
+					return GetTileFromCoord(clickedCoordinate);
+				}
+            }
 			return null;
 		}
 

@@ -9,7 +9,7 @@ namespace GridGame {
     public Tile(Coordinate coordinate) {
       this.coordinate = coordinate;
       // Add prefab to the tile layer
-      tilePrefab.layer = 8;
+      tilePrefab.layer = LayerMask.NameToLayer("Tile");
     }
   }
 
