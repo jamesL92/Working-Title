@@ -160,4 +160,24 @@ namespace ActionSystem {
       }
     }
   }
+
+  public class MoveUnitAction: Action {
+
+    private bool performed;
+
+    public MoveUnitAction(Player player): base(player) {}
+
+    public override IEnumerator Perform() {
+      if(!performed) {
+        performed = true;
+        yield break;
+      }
+    }
+
+    public override void Undo() {
+      if(performed) {
+        performed = false;
+      }
+    }
+  }
 }

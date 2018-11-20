@@ -16,6 +16,8 @@ namespace ActionSystem {
           return new BuildTilesAction(player);
         case ActionType.SPAWN_UNIT:
           return new SpawnUnitAction(player);
+        case ActionType.MOVE_UNIT:
+          return new MoveUnitAction(player);
         default:
           return null;
       }

@@ -3,5 +3,6 @@ namespace ActionSystem {
     GAIN_GOLD,
     BUILD_TILES,
     SPAWN_UNIT,
+    MOVE_UNIT,
   };
 }
