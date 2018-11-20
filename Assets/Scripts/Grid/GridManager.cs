@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PlayerClasses;
+using System.Linq;
 
 namespace GridGame {
 	public class GridManager : MonoSingleton<GridManager> {
@@ -104,6 +105,86 @@ namespace GridGame {
 						}
 				} while (coordinatesAdded > 0);
 				return allowedCoords;
+		}
+
+		public Stack<Coordinate> FindWalkablePath(Coordinate fromCoordinate, Coordinate toCoordinate) {
+			//Get a list of all the eligible coordinates. This will be used for:
+			//	Reducing the amount of coordinates we need to consider.
+			//	Evaluating neighbouring coords.
+			//Coordinate will be eligible if:
+			//	It is walkable
+			//	There is no occupier on that coordinate (except for on the starting tile).
+			List<Coordinate> walkableCoords = tiles
+																				.FindAll(tile => tile.walkable && !occupiers.Any(occ => occ.coordinate == tile.coordinate && occ.coordinate != fromCoordinate))
+																				.ConvertAll(tile => tile.coordinate);
+			Debug.Log(walkableCoords.Count);
+			if(!walkableCoords.Contains(fromCoordinate) || !walkableCoords.Contains(toCoordinate)) return null;
+			//Set of coordinates we've already evaluated.
+			List<Coordinate> closedSet = new List<Coordinate>();
+			// Set of coordinates to still to be considered.
+			List<Coordinate> openSet = new List<Coordinate>();
+			//For each tile (key), this will contain the neighbour (value) with the closest path from the start point.
+			Dictionary<Coordinate, Coordinate> nearestNeighbour = new Dictionary<Coordinate, Coordinate>();
+			//For each coordinate, get the actual cost of getting from the starting tile to that tile.
+			Dictionary<Coordinate, int> costFromStart = new Dictionary<Coordinate, int>();
+			//For each coordinate, get the expected cost for a path going from start to finish through this tile.
+			Dictionary<Coordinate, int> totalExpectedCost = new Dictionary<Coordinate, int>();
+			//For each coordinate, store the heuristic cost to the end of the route.
+
+			//Initialise stuff
+			openSet.Add(fromCoordinate);
+			foreach(Coordinate coord in walkableCoords) {
+				totalExpectedCost[coord] = int.MaxValue;
+			}
+			costFromStart[fromCoordinate] = 0;
+			totalExpectedCost[fromCoordinate] = fromCoordinate.ManhattanDistance(toCoordinate);
+
+			while(openSet.Count > 0) {
+				Coordinate considered = openSet.OrderByDescending(coordinate => totalExpectedCost[coordinate]).First();
+				if(considered == toCoordinate) {
+					//We're now considering the target coord.
+					//Therefore we've successfully found a path.
+					//Build a queue from origin to target.
+					Stack<Coordinate> path = new Stack<Coordinate>();
+					path.Push(toCoordinate);
+
+					Coordinate current = toCoordinate;
+					while(!path.Contains(fromCoordinate)) {
+						path.Push(nearestNeighbour[current]);
+						current = nearestNeighbour[current];
+					}
+					return path;
+				}
+
+				List<Coordinate> neighbours = walkableCoords.FindAll(coord => considered.ManhattanDistance(coord) == 1);
+				openSet.Remove(considered);
+				closedSet.Add(considered);
+				foreach(Coordinate neighbour in neighbours) {
+					// Ignore if we've already considered this neighbour.
+					if(closedSet.Contains(neighbour)) continue;
+
+					int costFromStartToNeighbour = costFromStart[considered] + considered.ManhattanDistance(neighbour);
+
+					if(!openSet.Contains(neighbour)) {
+						// Consider the neighbour in a future loop
+						openSet.Add(neighbour);
+					}
+					else if (costFromStartToNeighbour >= costFromStart[neighbour]) {
+						//Neighbour must be in the closed set here.
+						//We've already found at worst an equidistant path from start to neighbour.
+						continue;
+					}
+
+					//We've now found the best route from start to neighbour.
+					nearestNeighbour[neighbour] = considered;
+					costFromStart[neighbour] = costFromStartToNeighbour;
+					totalExpectedCost[neighbour] = costFromStartToNeighbour + neighbour.ManhattanDistance(toCoordinate);
+				}
+			}
+			//We've exhausted all possible travesal paths,
+			//However still didn't get to our target. Thus
+			//no walkable path exists.
+			return null;
 		}
 	}
 }
