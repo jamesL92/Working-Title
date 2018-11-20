@@ -69,6 +69,15 @@ namespace GridGame {
 			}
 		}
 
+		public void MoveOccupier(GridOccupier occupier, Coordinate toCoordinate) {
+			foreach(Transform _occupier in transform) {
+				if(_occupier.transform.position == CoordinateToWorldPos(occupier.coordinate) && _occupier.tag == "GridObject") {
+					_occupier.transform.position = CoordinateToWorldPos(toCoordinate);
+					occupier.coordinate = toCoordinate;
+				}
+			}
+		}
+
 		public Vector3 CoordinateToWorldPos(Coordinate coordinate) {
 			return new Vector3(coordinate.x, coordinate.y, transform.position.z);
 		}

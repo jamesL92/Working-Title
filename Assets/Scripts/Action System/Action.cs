@@ -164,18 +164,52 @@ namespace ActionSystem {
   public class MoveUnitAction: Action {
 
     private bool performed;
-
+    private GridOccupier selectedUnit = null;
+    private Coordinate fromCoord;
+    private Coordinate toCoord;
+    private int maxMovementSpeed = 5;
     public MoveUnitAction(Player player): base(player) {}
 
     public override IEnumerator Perform() {
       if(!performed) {
+        while(true) {
+          if(Input.GetMouseButtonDown(0)) {
+            RaycastHit hit;
+
+            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit)) {
+              Coordinate clickedCoordinate = GridManager.instance.WorldPosToCoordinate(hit.point);
+              GridOccupier _selectedUnit = GridManager.instance.occupiers
+                            .Find(occ => occ.GetType() == typeof(Unit) && occ.coordinate == clickedCoordinate && occ.owner == player);
+              if(_selectedUnit != null) {
+                // We've picked a new unit.
+                selectedUnit = _selectedUnit;
+              }
+              else if(GridManager.instance.occupiers.Any(occ => occ.coordinate == clickedCoordinate)) {
+                // We've picked an invalid unit.
+              }
+              else if(selectedUnit != null && GridManager.instance.tiles.Find(tile => tile.coordinate == clickedCoordinate).walkable) {
+                // We have a unit selected, and we've clicked on a walkable tile.
+                // Check if we can build a path from our selected unit to our target coordinate.
+                Stack<Coordinate> path = GridManager.instance.FindWalkablePath(selectedUnit.coordinate, clickedCoordinate);
+                if(path != null && path.Count < maxMovementSpeed) {
+                  fromCoord = selectedUnit.coordinate;
+                  toCoord = clickedCoordinate;
+                  GridManager.instance.MoveOccupier(selectedUnit, toCoord);
         performed = true;
         yield break;
+      }
+    }
+            }
+          }
+          yield return null;
+        }
       }
     }
 
     public override void Undo() {
       if(performed) {
+        GridManager.instance.MoveOccupier(selectedUnit, fromCoord);
+        selectedUnit = null;
         performed = false;
       }
     }
