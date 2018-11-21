@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33760081916086084}
   - component: {fileID: 23418981574366622}
   - component: {fileID: 65495106425259522}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Walkable Tile
   m_TagString: Tile
   m_Icon: {fileID: 0}
