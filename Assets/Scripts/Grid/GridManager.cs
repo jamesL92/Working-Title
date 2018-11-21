@@ -7,9 +7,12 @@ namespace GridGame {
 	public class GridManager : MonoSingleton<GridManager> {
 
 		GridBuilder builder;
+		Selector tileSelector;
 
 		public List<Tile> tiles = new List<Tile>();
 		public List<GridOccupier> occupiers = new List<GridOccupier>();
+		public Tile selectedTile;
+		public GridOccupier selectedOccupier;
 
 		protected override void Awake() {
 			base.Awake();
@@ -17,8 +20,41 @@ namespace GridGame {
 			builder.GenerateMap();
 			builder.SpawnBuildings();
 			builder.SpawnUnits();
+			tileSelector = gameObject.AddComponent(typeof(Selector)) as Selector;
 		}
 
+		public void Update() {
+			/* 
+			TODO: 
+				Completely refactor this code, it hurts my very soul.  If statements are verbose due to
+				console logs and if we had a GridOccupier as part of a tile, we wouldn't need the OccupierFromClick
+				code or the logic to handle selectedOccupier effectively.
+			*/
+			bool tileChange = false;
+
+			// Check if a tile was selected and set selected tile if it was
+			Tile tempSelectedTile = tileSelector.GetTileFromClick();
+			if (tempSelectedTile != null) {
+				Debug.Log("Tile clicked!");
+				this.selectedTile = tempSelectedTile;
+				tileChange = true;
+			}
+			// Check if an occupier was selected and set selected tile if it was
+			GridOccupier tempSelectedOccupier = tileSelector.GetOccupierFromClick();
+			if (tempSelectedOccupier != null) {
+				Debug.Log("Occupier selected!");
+				this.selectedOccupier = tempSelectedOccupier;
+			}
+			else if (tempSelectedOccupier == null && tileChange == true){
+				// Clear currently selected occupier if we selected an empty tile
+				Debug.Log("No occupier currently selected.");
+				this.selectedOccupier = null;
+			}
+
+			// GridOccupier is no longer selected if it is moved from the currently selected tile
+			if(selectedOccupier != null && selectedOccupier.coordinate != selectedTile.coordinate)
+				selectedOccupier = null;
+		}
 		public void AddTile(Tile tile) {
 			//Add new tile to the grid, or replace existing tile.
 			Tile currentTileAtCoordinate = tiles.Find(_tile => _tile.coordinate == tile.coordinate);
@@ -56,17 +92,15 @@ namespace GridGame {
 			return null;
 		}
 
-		public Tile GetTileFromClick() {
-			// Layermask ignores all but the Tile layer
-            int layerMask = LayerMask.GetMask("Tile");
-            if(Input.GetMouseButtonDown(0)) {
-                RaycastHit hit;
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, layerMask)){
-                    // I could use the gridmanager helper function here to retrieve coords
-					Coordinate clickedCoordinate = instance.WorldPosToCoordinate(hit.point);
-					return GetTileFromCoord(clickedCoordinate);
-				}
-            }
+		public GridOccupier GetOccupierFromCoord(Coordinate occupierLoc) {
+			/*
+				Iterate through all occupiers in the grid, if occupier matches coordinates return it,
+				otherwise return null.
+			*/
+			for (int i = 0; i < occupiers.Count; i++) {
+				if (occupiers[i].coordinate.x == occupierLoc.x && occupiers[i].coordinate.y == occupierLoc.y)
+					return occupiers[i];
+			}
 			return null;
 		}
 

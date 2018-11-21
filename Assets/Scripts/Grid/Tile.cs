@@ -8,8 +8,6 @@ namespace GridGame {
 
     public Tile(Coordinate coordinate) {
       this.coordinate = coordinate;
-      // Add prefab to the tile layer
-      tilePrefab.layer = LayerMask.NameToLayer("Tile");
     }
   }
 
@@ -17,12 +15,16 @@ namespace GridGame {
     public WalkableTile(Coordinate coordinate): base(coordinate) {
       this.walkable = true;
       this.tilePrefab = PrefabManager.instance.walkableTilePrefab;
+      // Add prefab to the tile layer
+      tilePrefab.layer = LayerMask.NameToLayer("Tile");
     }
   }
   public class UnwalkableTile: Tile {
     public UnwalkableTile(Coordinate coordinate): base(coordinate) {
       this.walkable = false;
       this.tilePrefab = PrefabManager.instance.unwalkableTilePrefab;
+      // Add prefab to the tile layer
+      tilePrefab.layer = LayerMask.NameToLayer("Tile");
     }
   }
 }

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33581860173861188}
   - component: {fileID: 23406335551508866}
   - component: {fileID: 65411813786690074}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Unwalkable Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
