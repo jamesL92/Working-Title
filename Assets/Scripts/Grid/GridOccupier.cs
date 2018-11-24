@@ -7,19 +7,23 @@ namespace GridGame {
     public GameObject prefab;
     public Player owner;
     protected int health;
+    protected int maxHealth;
 
     public GridOccupier(Coordinate coordinate, Player owner) {
       this.coordinate = coordinate;
       this.owner = owner;
       this.health = 100;
+      this.maxHealth = 100;
     }
 
     public void modify_health(int modifier) {
       /*
         Function to apply modifier to health (e.g. -2 or +2)
+
+        TODO: Have this function take a DamageData struct for more complex interactions.
       */
       // Health cannot be greater than 100
-      if (health + modifier > 100) health = 100;
+      if (health + modifier > maxHealth) health = maxHealth;
       // Destroy self if health is fully depleted
       else if (health + modifier <= 0) GridManager.instance.RemoveOccupier(this);
       // Apply modifier
@@ -31,11 +35,8 @@ namespace GridGame {
     public Unit(Coordinate coordinate, Player owner): base(coordinate, owner) {
       prefab = PrefabManager.instance.unitPrefab;
       this.health = 20;
+      this.maxHealth = 20;
     }
-
-
-
-
   }
 
   public class Building: GridOccupier {
