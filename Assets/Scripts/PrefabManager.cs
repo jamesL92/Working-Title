@@ -6,4 +6,8 @@ public class PrefabManager: MonoSingleton<PrefabManager> {
     public GameObject unwalkableTilePrefab;
     public GameObject castlePrefab;
     public GameObject unitPrefab;
+
+    //Prefab References for the card game.
+    public Card cardPrefab;
+    public Card cardBackPrefab;
 }

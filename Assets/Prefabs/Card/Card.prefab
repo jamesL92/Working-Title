@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 222474740841681130}
   - component: {fileID: 114611288755453324}
   - component: {fileID: 114157793691396330}
+  - component: {fileID: 114133708807574972}
+  - component: {fileID: 225284967380251670}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -29,6 +31,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114133708807574972
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1718303275578076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a98ce0855673da4db6383b56809955f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBeingDragged: 0
 --- !u!114 &114157793691396330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -40,6 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf096e9fe419d3649907be7f094881a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Visible: 0
 --- !u!114 &114611288755453324
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -92,3 +107,14 @@ RectTransform:
   m_AnchoredPosition: {x: -806, y: 393}
   m_SizeDelta: {x: 81, y: 106}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225284967380251670
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1718303275578076}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
