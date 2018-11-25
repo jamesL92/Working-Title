@@ -19,8 +19,8 @@ namespace Working_Title.Assets.Scripts
             get { return playerQueue.ToArray(); }
         }
         //Event for when the turn changes.
-        public delegate void TurnStartAction(Player currentPlayer);
-        public event TurnStartAction onTurnStart;
+        public delegate void TurnStartAction();
+        public static event TurnStartAction onTurnStart;
 
         public int playerStartingGold;
 
@@ -50,7 +50,7 @@ namespace Working_Title.Assets.Scripts
 
                 //Fire an event when the turn has started.
                 if(onTurnStart != null) {
-                    onTurnStart(currentPlayer);
+                    onTurnStart();
                 }
             }
             else {
