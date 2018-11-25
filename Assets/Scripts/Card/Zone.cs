@@ -2,11 +2,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Zone: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler {
+
   public void OnPointerEnter(PointerEventData data) {
-    // Debug.Log("Pointer entered me");
+    Debug.Log("Pointer entered me");
   }
   public void OnPointerExit(PointerEventData data) {
-    // Debug.Log("Pointer left me");
+    Debug.Log("Pointer left me");
   }
   public void OnDrop(PointerEventData data) {
     Debug.Log(string.Format("{0} was dropped onto {1}", data.pointerDrag.name, name));

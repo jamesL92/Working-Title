@@ -11,10 +11,12 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
   // To detect whether or not we're in a valid position.
   // Should be set to false in OnDrop of a valid zone.
   public bool isBeingDragged;
+
+
   public void OnBeginDrag(PointerEventData data) {
     isBeingDragged = true;
     ReplaceWithProxy();
-    ShouldBlockRaycasts(false);
+    SetShouldBlockRaycasts(false);
   }
   public void OnDrag(PointerEventData data) {
     transform.position = Input.mousePosition;
@@ -22,8 +24,7 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
   public void OnEndDrag(PointerEventData data) {
     if(isBeingDragged) RestoreToProxy();
     else Destroy(Proxy);
-
-    ShouldBlockRaycasts(true);
+    SetShouldBlockRaycasts(true);
   }
 
   private void ReplaceWithProxy() {
@@ -40,9 +41,10 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     transform.SetParent(Proxy.transform.parent);
     transform.SetSiblingIndex(currentIndex);
     Destroy(Proxy.gameObject);
+    isBeingDragged = false;
   }
 
-  private void ShouldBlockRaycasts(bool value) {
+  private void SetShouldBlockRaycasts(bool value) {
     if(GetComponent<CanvasGroup>() != null) {
       GetComponent<CanvasGroup>().blocksRaycasts = value;
     }

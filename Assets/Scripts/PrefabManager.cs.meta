@@ -3,7 +3,17 @@ guid: a847bfea6f4ec9c499050158e7034872
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - walkableTilePrefab: {fileID: 1963121232507362, guid: e87791d1da5ea5545849da89b93cc38e,
+      type: 2}
+  - unwalkableTilePrefab: {fileID: 1837205432200124, guid: a9071b1bd4970bc42bb0934ca7b38df8,
+      type: 2}
+  - castlePrefab: {fileID: 1822824833861060, guid: d213ace9529ca61408b6c150021c3a62,
+      type: 2}
+  - unitPrefab: {fileID: 1816852433909050, guid: 38452e099c87e9d49ad1c27b9fc6e5b9,
+      type: 2}
+  - cardPrefab: {fileID: 1718303275578076, guid: 4acb0d77f5acd4b438f66f023dffef9c,
+      type: 2}
   executionOrder: -80
   icon: {instanceID: 0}
   userData: 

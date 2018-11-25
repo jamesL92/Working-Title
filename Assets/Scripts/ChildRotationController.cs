@@ -9,7 +9,7 @@ public class ChildRotationController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		foreach(Transform child in transform) {
-			child.rotation = Quaternion.Euler(rotation);
+			child.localRotation = Quaternion.Euler(rotation);
 		}
 	}
 }
