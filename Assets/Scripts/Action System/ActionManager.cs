@@ -11,6 +11,7 @@ namespace ActionSystem {
     protected override void Awake() {
       base.Awake();
       factory = new ActionFactory(this);
+      GameManager.onTurnStart += ClearStack;
     }
 
     void Update() {
@@ -19,17 +20,19 @@ namespace ActionSystem {
     }
 
     public void AddAction(string type) {
-      try {
+      if (actionStack.Count != 5){
+        try {
 
-        Action action = factory.CreateAction((ActionType)Enum.Parse(typeof(ActionType), type), GameManager.instance.currentPlayer);
-        actionStack.Push(action);
-        StartCoroutine(action.Perform());
+          Action action = factory.CreateAction((ActionType)Enum.Parse(typeof(ActionType), type), GameManager.instance.currentPlayer);
+          actionStack.Push(action);
+          StartCoroutine(action.Perform());
 
-      } catch(ArgumentException) {
+        } catch(ArgumentException) {
 
-        Debug.LogError(String.Format("{0} is not a valid action type", type));
+          Debug.LogError(String.Format("{0} is not a valid action type", type));
 
-      }
+        }
+      } else { Debug.Log("No more actions left this turn"); }
     }
 
     public void UndoLastAction() {
