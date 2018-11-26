@@ -8,7 +8,7 @@ public class CardGameManager: MonoSingleton<CardGameManager> {
   public struct Side {
     public Player Player;
     public List<Zone> CardSlots;
-    public Zone Deck;
+    public Deck Deck;
     public Zone Hand;
     public Zone Discard;
   }
@@ -21,6 +21,8 @@ public class CardGameManager: MonoSingleton<CardGameManager> {
   public Transform PlayerAreaTransform;
   public float BoardRotationTime;
   private bool Rotating;
+
+  [SerializeField] private int InitialHandSize;
 
   void Start() {
     InitGame();
@@ -38,12 +40,16 @@ public class CardGameManager: MonoSingleton<CardGameManager> {
     for (int i = 0; i < DeckSize; i++)
     {
         Card card;
-        card = Instantiate(PrefabManager.instance.cardPrefab, AttackingSide.Deck.transform) as Card;
+        card = Instantiate(PrefabManager.instance.cardPrefab) as Card;
         card.name = PrefabManager.instance.cardPrefab.name;
+        AttackingSide.Deck.AddCard(card);
 
-        card = Instantiate(PrefabManager.instance.cardPrefab, DefendingSide.Deck.transform) as Card;
+        card = Instantiate(PrefabManager.instance.cardPrefab) as Card;
         card.name = PrefabManager.instance.cardPrefab.name;
+        DefendingSide.Deck.AddCard(card);
     }
+    AttackingSide.Deck.OnClick += delegate { AttackingSide.Deck.DrawCard(AttackingSide.Hand); };
+    DefendingSide.Deck.OnClick += delegate { AttackingSide.Deck.DrawCard(DefendingSide.Hand); };
   }
 
   void Update() {
@@ -66,11 +72,18 @@ public class CardGameManager: MonoSingleton<CardGameManager> {
     float rotationStartTime = Time.time;
     Rotating = true;
     float targetZRotation = PlayerAreaTransform.localEulerAngles.z + 180f;
-    Debug.Log(string.Format("time: {0}, targetTime: {1}", Time.time, rotationStartTime + BoardRotationTime));
     while(Time.time <= rotationStartTime + BoardRotationTime) {
       PlayerAreaTransform.localRotation *= Quaternion.Euler(0,0,180/BoardRotationTime * Time.deltaTime);
       yield return null;
     }
     PlayerAreaTransform.localRotation = Quaternion.Euler(0,0,targetZRotation);
+    Rotating = false;
+  }
+
+  public void DrawInitialCards() {
+    for(int i = 0; i < InitialHandSize; i++) {
+      AttackingSide.Deck.DrawCard(AttackingSide.Hand);
+      DefendingSide.Deck.DrawCard(DefendingSide.Hand);
+    }
   }
 }

@@ -1,20 +1,31 @@
 using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
-public class Zone: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler {
+public abstract class Zone: MonoBehaviour, IPointerClickHandler {
 
-  public void OnPointerEnter(PointerEventData data) {
-    Debug.Log("Pointer entered me");
+  public delegate void ClickHandler();
+  public event ClickHandler OnClick;
+
+  [SerializeField] protected bool CardsVisible;
+  protected List<Card> Cards = new List<Card>();
+
+  public int Capacity;
+
+  public virtual bool AddCard(Card card) {
+    if(Cards.Count >= Capacity) {
+      return false;
+    }
+    Cards.Add(card);
+    card.transform.SetParent(transform);
+    card.Visible = CardsVisible;
+    return true;
   }
-  public void OnPointerExit(PointerEventData data) {
-    Debug.Log("Pointer left me");
-  }
-  public void OnDrop(PointerEventData data) {
-    Debug.Log(string.Format("{0} was dropped onto {1}", data.pointerDrag.name, name));
-    CardDragHandler dragHandler = data.pointerDrag.GetComponent<CardDragHandler>();
-    if(dragHandler != null) {
-      dragHandler.isBeingDragged = false;
-      dragHandler.transform.SetParent(transform);
+
+  void IPointerClickHandler.OnPointerClick(PointerEventData data) {
+    Debug.Log("I was clicked!");
+    if(OnClick != null) {
+      OnClick();
     }
   }
 }

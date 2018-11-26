@@ -9,5 +9,6 @@ public class PrefabManager: MonoSingleton<PrefabManager> {
 
     //Prefab References for the card game.
     public Card cardPrefab;
-    public Card cardBackPrefab;
+    public Sprite cardFrontSprite;
+    public Sprite cardBackSprite;
 }
