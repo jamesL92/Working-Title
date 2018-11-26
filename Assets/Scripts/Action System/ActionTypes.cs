@@ -4,5 +4,6 @@ namespace ActionSystem {
     BUILD_TILES,
     SPAWN_UNIT,
     MOVE_UNIT,
+    ATTACK,
   };
 }

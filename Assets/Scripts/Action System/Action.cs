@@ -10,6 +10,7 @@ namespace ActionSystem {
   public abstract class Action {
 
     protected Player player;
+    protected bool performed;
 
     public Action(Player player) {
       this.player = player;
@@ -19,8 +20,6 @@ namespace ActionSystem {
   }
 
   public class GainGoldAction: Action {
-
-    private bool performed;
 
     public GainGoldAction(Player player): base(player) {}
 
@@ -42,7 +41,6 @@ namespace ActionSystem {
 
   public class BuildTilesAction: Action {
 
-    private bool performed;
     private int costPerTile = 2;
     private List<Coordinate> coordinatesWithTilesBuilt = new List<Coordinate>();
 
@@ -136,7 +134,6 @@ namespace ActionSystem {
   public class SpawnUnitAction: Action {
 
     private int spawnUnitCost = 5;
-    private bool performed;
     private Unit spawnedUnit;
     public SpawnUnitAction(Player player): base(player) {}
 
@@ -163,7 +160,6 @@ namespace ActionSystem {
 
   public class MoveUnitAction: Action {
 
-    private bool performed;
     private GridOccupier selectedUnit = null;
     private Coordinate fromCoord;
     private Coordinate toCoord;
@@ -212,6 +208,54 @@ namespace ActionSystem {
         selectedUnit = null;
         performed = false;
       }
+    }
+  }
+
+  public class AttackAction : Action {
+
+    public AttackAction(Player player): base(player) {}
+    public override IEnumerator Perform() {
+      if(!performed) {
+        Unit unitOne = null;
+        Unit unitTwo = null;
+
+        while(true) {
+          // TODO: Refactor this class when/if GridOccupiers become a member of tile (that would render
+          // some of this logic unneeded)
+          GridOccupier selected = GridManager.instance.tileSelector.GetOccupierFromClick();
+          Tile selectedTile = GridManager.instance.tileSelector.GetTileFromClick();
+          
+          // Unit one is selected then we click a tile without a unit in it
+          if (unitOne != null && selectedTile != null){
+              if (GridManager.instance.GetTileFromCoord(selectedTile.coordinate) != null) {
+                Debug.Log("Resetting action");
+                unitOne = null;
+              }
+          }
+
+          if (unitOne == null && selected.GetType() == typeof(Unit)){
+            unitOne = (Unit)selected;
+            // reset selected variable
+            selected = null;
+          }
+          else if (unitOne != null && selected.GetType() == typeof(Unit) && unitOne != unitTwo) {
+            if (unitOne.owner == unitTwo.owner) {
+              Debug.Log("You cannot attack your own unit! (resetting action)");
+              // Reset the action
+              unitOne = null;
+            } else {
+              // Player picked an owned unit and an enemy unit, COMMENCE THE BATTLE!
+              unitTwo = (Unit)selected;
+
+              performed = true;
+            }
+          }
+        }
+      }
+      yield return null;
+    }
+    public override void Undo() {
+      Debug.Log("Attacks are for life, not just for christmas (cannot undo attack action)");
     }
   }
 }
