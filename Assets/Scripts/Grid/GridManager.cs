@@ -8,7 +8,7 @@ namespace GridGame {
 	public class GridManager : MonoSingleton<GridManager> {
 
 		GridBuilder builder;
-		Selector tileSelector;
+		public Selector tileSelector;
 
 		public List<Tile> tiles = new List<Tile>();
 		public List<GridOccupier> occupiers = new List<GridOccupier>();
