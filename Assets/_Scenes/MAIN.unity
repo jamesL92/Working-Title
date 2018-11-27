@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63b8110f7843094bb51f30a147ebc03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileSelector: {fileID: 0}
 --- !u!4 &306170371
 Transform:
   m_ObjectHideFlags: 0
@@ -547,6 +548,11 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114603232529775590, guid: 702a2d26c453aab4c80915a383f53b50,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224197194323509164, guid: 702a2d26c453aab4c80915a383f53b50,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -781,6 +787,36 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: MOVE_UNIT
+      objectReference: {fileID: 0}
+    - target: {fileID: 114603232529775590, guid: 702a2d26c453aab4c80915a383f53b50,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114603232529775590, guid: 702a2d26c453aab4c80915a383f53b50,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114603232529775590, guid: 702a2d26c453aab4c80915a383f53b50,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1064784673}
+    - target: {fileID: 114603232529775590, guid: 702a2d26c453aab4c80915a383f53b50,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AddAction
+      objectReference: {fileID: 0}
+    - target: {fileID: 114603232529775590, guid: 702a2d26c453aab4c80915a383f53b50,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114603232529775590, guid: 702a2d26c453aab4c80915a383f53b50,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: ATTACK
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 702a2d26c453aab4c80915a383f53b50, type: 2}
@@ -1086,6 +1122,9 @@ MonoBehaviour:
   castlePrefab: {fileID: 1822824833861060, guid: d213ace9529ca61408b6c150021c3a62,
     type: 2}
   unitPrefab: {fileID: 1816852433909050, guid: 38452e099c87e9d49ad1c27b9fc6e5b9, type: 2}
+  cardPrefab: {fileID: 0}
+  cardFrontSprite: {fileID: 0}
+  cardBackSprite: {fileID: 0}
 --- !u!4 &2022334748
 Transform:
   m_ObjectHideFlags: 0

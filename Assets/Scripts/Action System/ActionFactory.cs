@@ -18,6 +18,8 @@ namespace ActionSystem {
           return new SpawnUnitAction(player);
         case ActionType.MOVE_UNIT:
           return new MoveUnitAction(player);
+        case ActionType.ATTACK:
+          return new AttackAction(player);
         default:
           return null;
       }
