@@ -2,6 +2,7 @@ using UnityEngine;
 using PlayerClasses;
 using System.Collections;
 using System.Collections.Generic;
+using GridGame;
 
 public class CardGameManager: MonoSingleton<CardGameManager> {
   [System.Serializable]
@@ -12,6 +13,8 @@ public class CardGameManager: MonoSingleton<CardGameManager> {
     public Zone Hand;
     public Zone Discard;
   }
+
+  public static AttackData data;
 
   public int DeckSize;
   [SerializeField] public Side AttackingSide;

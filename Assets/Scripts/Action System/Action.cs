@@ -2,9 +2,11 @@ using System.Collections;
 using PlayerClasses;
 using GridGame;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Linq;
 using Working_Title.Assets.Scripts;
+
 
 namespace ActionSystem {
   public abstract class Action {
@@ -216,8 +218,8 @@ namespace ActionSystem {
     public AttackAction(Player player): base(player) {}
     public override IEnumerator Perform() {
       if(!performed) {
-        Unit unitOne = null;
-        Unit unitTwo = null;
+        GridOccupier unitOne = null;
+        GridOccupier unitTwo = null;
 
         while(true) {
           // TODO: Refactor this class when/if GridOccupiers become a member of tile (that would render
@@ -227,26 +229,42 @@ namespace ActionSystem {
           
           // Unit one is selected then we click a tile without a unit in it
           if (unitOne != null && selectedTile != null){
-              if (GridManager.instance.GetTileFromCoord(selectedTile.coordinate) != null) {
+              if (GridManager.instance.GetOccupierFromCoord(selectedTile.coordinate) == null) {
                 Debug.Log("Resetting action");
                 unitOne = null;
               }
           }
 
-          if (unitOne == null && selected.GetType() == typeof(Unit)){
-            unitOne = (Unit)selected;
+          if (unitOne == null && selected != null) {
+            unitOne = selected;
             // reset selected variable
             selected = null;
           }
-          else if (unitOne != null && selected.GetType() == typeof(Unit) && unitOne != unitTwo) {
+          else if (unitOne != null && selected != null && unitOne != unitTwo) {
             if (unitOne.owner == unitTwo.owner) {
               Debug.Log("You cannot attack your own unit! (resetting action)");
               // Reset the action
               unitOne = null;
             } else {
               // Player picked an owned unit and an enemy unit, COMMENCE THE BATTLE!
-              unitTwo = (Unit)selected;
+              unitTwo = selected;
 
+              // Find occupier belonging to current player
+              // Reset action if occupier not unit, else populate AttackData struct.
+              if (unitOne.owner == GameManager.instance.currentPlayer && unitOne.GetType() == typeof(Unit)) {
+                CardGameManager.data = new AttackData((Unit)unitOne, unitTwo);
+              }
+              else if (unitTwo.owner == GameManager.instance.currentPlayer && unitTwo.GetType() == typeof(Unit)) {
+                CardGameManager.data = new AttackData((Unit)unitTwo, unitOne);
+              }
+              else {
+                Debug.Log("You can only attack with a unit!");
+                unitOne = unitTwo = null;
+              }
+              
+              SceneManager.LoadScene("CARD", LoadSceneMode.Additive);
+
+              // Not loading async, so action is set to performed when we continue execution
               performed = true;
             }
           }
