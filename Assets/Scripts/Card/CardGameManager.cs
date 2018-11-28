@@ -50,6 +50,8 @@ public class CardGameManager: MonoSingleton<CardGameManager> {
     }
     AttackingSide.Deck.OnClick += delegate { AttackingSide.Deck.DrawCard(AttackingSide.Hand); };
     DefendingSide.Deck.OnClick += delegate { AttackingSide.Deck.DrawCard(DefendingSide.Hand); };
+
+    DrawInitialCards();
   }
 
   void Update() {
