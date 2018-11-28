@@ -8,7 +8,7 @@ namespace GridGame {
 	public class GridManager : MonoSingleton<GridManager> {
 
 		GridBuilder builder;
-		public Selector tileSelector;
+		private Selector tileSelector;
 
 		public List<Tile> tiles = new List<Tile>();
 		public List<GridOccupier> occupiers = new List<GridOccupier>();
@@ -103,6 +103,15 @@ namespace GridGame {
 					return occupiers[i];
 			}
 			return null;
+		}
+
+		public void ResetSelected() {
+			/*
+				Reset the currently selected tile and occupier
+			*/
+			selectedTile = null;
+			// TODO: remove when occupier is member of tile.
+			selectedOccupier = null;
 		}
 
 		public void AddOccupier(GridOccupier occupier) {

@@ -217,59 +217,62 @@ namespace ActionSystem {
 
     public AttackAction(Player player): base(player) {}
     public override IEnumerator Perform() {
-      if(!performed) {
-        GridOccupier unitOne = null;
-        GridOccupier unitTwo = null;
+        // TODO: Refactor this class when/if GridOccupiers become a member of tile (that would render
+        // some of this logic unneeded)
+        GridOccupier occupierOne = null, occupierTwo = null, selected = null;
+        Tile selectedTile = null;
+        GridManager GM = GridManager.instance;
+        bool inRange = false;
+        Debug.Log("Attack action started");
 
-        while(true) {
-          // TODO: Refactor this class when/if GridOccupiers become a member of tile (that would render
-          // some of this logic unneeded)
-          GridOccupier selected = GridManager.instance.tileSelector.GetOccupierFromClick();
-          Tile selectedTile = GridManager.instance.tileSelector.GetTileFromClick();
-          
-          // Unit one is selected then we click a tile without a unit in it
-          if (unitOne != null && selectedTile != null){
-              if (GridManager.instance.GetOccupierFromCoord(selectedTile.coordinate) == null) {
-                Debug.Log("Resetting action");
-                unitOne = null;
-              }
+        while(!performed) {
+          selected = GM.selectedOccupier;
+          selectedTile = GM.selectedTile;
+          if (occupierOne == null && selected != null) {
+            // If an occupier was selected, and no first occupier is set, set the first occupier
+            Debug.Log("First occupier selected");
+            occupierOne = selected;
+            GM.ResetSelected();
           }
-
-          if (unitOne == null && selected != null) {
-            unitOne = selected;
-            // reset selected variable
-            selected = null;
-          }
-          else if (unitOne != null && selected != null && unitOne != unitTwo) {
-            if (unitOne.owner == unitTwo.owner) {
-              Debug.Log("You cannot attack your own unit! (resetting action)");
-              // Reset the action
-              unitOne = null;
-            } else {
-              // Player picked an owned unit and an enemy unit, COMMENCE THE BATTLE!
-              unitTwo = selected;
-
-              // Find occupier belonging to current player
-              // Reset action if occupier not unit, else populate AttackData struct.
-              if (unitOne.owner == GameManager.instance.currentPlayer && unitOne.GetType() == typeof(Unit)) {
-                CardGameManager.data = new AttackData((Unit)unitOne, unitTwo);
+          else if (occupierOne != null && selectedTile != null && selected != occupierOne) {
+              // If the first occupier is set, a second tile was clicked, and selected
+              // occupier is not equal to first occupier.
+             if (GM.GetOccupierFromCoord(selectedTile.coordinate) == null) {
+                // Reset the action if a tile without an occupier was selected
+                Debug.Log("Clicked empty tile, resetting action"); occupierOne = null;
+                GM.ResetSelected();
               }
-              else if (unitTwo.owner == GameManager.instance.currentPlayer && unitTwo.GetType() == typeof(Unit)) {
-                CardGameManager.data = new AttackData((Unit)unitTwo, unitOne);
-              }
+              // Player picked an owned occupier and an enemy occupier, COMMENCE THE BATTLE!
+              occupierTwo = selected;
+
+              if (occupierOne.owner == GameManager.instance.currentPlayer && occupierOne.GetType() == typeof(Unit))
+                // First selected unit is the current players unit, populate AttackData accordingly
+                CardGameManager.data = new AttackData((Unit)occupierOne, occupierTwo);
+              else if (occupierTwo.owner == GameManager.instance.currentPlayer && occupierTwo.GetType() == typeof(Unit))
+                // Second selecet unit is the current player's unit, populate AttackData
+                CardGameManager.data = new AttackData((Unit)occupierTwo, occupierOne);
               else {
+                // Reset the action if the current players selected occupier is not a unit
                 Debug.Log("You can only attack with a unit!");
-                unitOne = unitTwo = null;
+                occupierOne = occupierTwo = null;
               }
               
-              SceneManager.LoadScene("CARD", LoadSceneMode.Additive);
+              if (occupierOne != null && occupierTwo != null) {
+                // CHECK IF IN RANGE HERE
 
-              // Not loading async, so action is set to performed when we continue execution
+                // Load CARD scene synchronously if two valid occupiers are selected
+                SceneManager.LoadScene("CARD", LoadSceneMode.Additive);
+              }
+              GM.ResetSelected();
               performed = true;
             }
+          else if (occupierOne != null && selected == occupierOne) {
+            // We selected the same unit twice
+            Debug.Log("Same unit selected twice, terminating action");
+            GM.ResetSelected();
+            yield return null;
           }
         }
-      }
       yield return null;
     }
     public override void Undo() {
