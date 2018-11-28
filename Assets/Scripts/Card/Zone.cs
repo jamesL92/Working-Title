@@ -19,11 +19,23 @@ public abstract class Zone: MonoBehaviour, IPointerClickHandler {
     Cards.Add(card);
     card.transform.SetParent(transform);
     card.Visible = CardsVisible;
+    card.CurrentZone = this;
     return true;
   }
 
+  public virtual bool RemoveCard(Card card) {
+    if(Cards.Count <= 0) {
+      return false;
+    }
+    Cards.Remove(card);
+    card.transform.SetParent(card.GetComponentInParent<Canvas>().transform);
+    card.Visible = CardsVisible;
+    if(card.CurrentZone == this) {
+      card.CurrentZone = null;
+    }
+    return true;
+  }
   void IPointerClickHandler.OnPointerClick(PointerEventData data) {
-    Debug.Log("I was clicked!");
     if(OnClick != null) {
       OnClick();
     }
