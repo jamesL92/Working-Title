@@ -4,6 +4,7 @@ public class UnitSlot: Zone {
 
   public UnitSlot oppositeSlot;
   public Commander opponentCommander;
+  public Discard DiscardPile;
 
   private void Start() {
     OnClick += UnitSlotClickHandler;
@@ -25,10 +26,19 @@ public class UnitSlot: Zone {
     Card myCard = GetUnit();
     Card oppositeCard = oppositeSlot.GetUnit();
     if(myCard && oppositeCard) {
-      Debug.Log(string.Format("Card is {0} is attacking card in slot {1}.", name, oppositeSlot.name));
+      //TODO: Refactor this when we have implemented units properly.
+      oppositeSlot.DestroyCard();
     }
     else if(myCard) {
       opponentCommander.Damage(10);
+    }
+  }
+
+  public void DestroyCard() {
+    Card unit = GetUnit();
+    if(GetUnit() != null) {
+      RemoveCard(unit);
+      DiscardPile.AddCard(unit);
     }
   }
 }

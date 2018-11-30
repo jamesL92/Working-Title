@@ -10,7 +10,7 @@ public class CardGameManager: MonoSingleton<CardGameManager> {
     public List<UnitSlot> CardSlots;
     public Deck Deck;
     public Zone Hand;
-    public Zone Discard;
+    public Discard Discard;
     public Commander commander;
   }
 
@@ -38,16 +38,18 @@ public class CardGameManager: MonoSingleton<CardGameManager> {
     AttackingSide.commander.LoadCommander(50);
     DefendingSide.commander.LoadCommander(50);
 
-    AddCommanderReferenceToZones();
+    SetupZones();
   }
 
-  private void AddCommanderReferenceToZones()
+  private void SetupZones()
   {
     foreach(UnitSlot slot in AttackingSide.CardSlots) {
       slot.opponentCommander = DefendingSide.commander;
+      slot.DiscardPile = AttackingSide.Discard;
     }
     foreach(UnitSlot slot in DefendingSide.CardSlots) {
       slot.opponentCommander = AttackingSide.commander;
+      slot.DiscardPile = DefendingSide.Discard;
     }
   }
 

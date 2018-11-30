@@ -6,7 +6,6 @@ public abstract class Zone: MonoBehaviour, IPointerClickHandler {
 
   public delegate void ClickHandler();
   public event ClickHandler OnClick;
-
   [SerializeField] protected bool CardsVisible;
   protected List<Card> Cards = new List<Card>();
 
@@ -39,5 +38,9 @@ public abstract class Zone: MonoBehaviour, IPointerClickHandler {
     if(OnClick != null) {
       OnClick();
     }
+  }
+
+  public void DestroyUnit() {
+
   }
 }
