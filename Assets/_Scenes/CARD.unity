@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 327274156}
   - component: {fileID: 327274155}
   m_Layer: 5
-  m_Name: Zone 2
+  m_Name: Defending Zone 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -232,6 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardsVisible: 1
   Capacity: 1
+  oppositeSlot: {fileID: 838257720}
 --- !u!1 &358169389
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,7 +310,7 @@ GameObject:
   - component: {fileID: 455223384}
   - component: {fileID: 455223382}
   m_Layer: 5
-  m_Name: Zone 4
+  m_Name: Attacking Zone 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -433,6 +434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardsVisible: 1
   Capacity: 1
+  oppositeSlot: {fileID: 1280757546}
 --- !u!1 &549923963
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,7 +644,7 @@ GameObject:
   - component: {fileID: 838257719}
   - component: {fileID: 838257717}
   m_Layer: 5
-  m_Name: Zone 3
+  m_Name: Attacking Zone 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -766,6 +768,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardsVisible: 1
   Capacity: 1
+  oppositeSlot: {fileID: 327274156}
 --- !u!1 &843512394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,7 +1220,7 @@ GameObject:
   - component: {fileID: 1280757546}
   - component: {fileID: 1280757545}
   m_Layer: 5
-  m_Name: Zone 1
+  m_Name: Defending Zone 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1322,6 +1325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardsVisible: 1
   Capacity: 1
+  oppositeSlot: {fileID: 455223385}
 --- !u!1 &1294320020
 GameObject:
   m_ObjectHideFlags: 0
@@ -2050,7 +2054,7 @@ GameObject:
   - component: {fileID: 2025393744}
   - component: {fileID: 2025393743}
   m_Layer: 5
-  m_Name: Zone 3
+  m_Name: Defending Zone 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2155,6 +2159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardsVisible: 1
   Capacity: 1
+  oppositeSlot: {fileID: 2058813293}
 --- !u!1 &2058813286
 GameObject:
   m_ObjectHideFlags: 0
@@ -2170,7 +2175,7 @@ GameObject:
   - component: {fileID: 2058813292}
   - component: {fileID: 2058813290}
   m_Layer: 5
-  m_Name: Zone 2
+  m_Name: Attacking Zone 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2294,6 +2299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardsVisible: 1
   Capacity: 1
+  oppositeSlot: {fileID: 2025393744}
 --- !u!1 &2075062667
 GameObject:
   m_ObjectHideFlags: 0
@@ -2404,7 +2410,7 @@ GameObject:
   - component: {fileID: 2076803283}
   - component: {fileID: 2076803282}
   m_Layer: 5
-  m_Name: Zone 4
+  m_Name: Defending Zone 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2509,6 +2515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardsVisible: 1
   Capacity: 1
+  oppositeSlot: {fileID: 2141707991}
 --- !u!1 &2127384709
 GameObject:
   m_ObjectHideFlags: 0
@@ -2718,7 +2725,7 @@ GameObject:
   - component: {fileID: 2141707990}
   - component: {fileID: 2141707988}
   m_Layer: 5
-  m_Name: Zone 1
+  m_Name: Attacking Zone 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2842,3 +2849,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardsVisible: 1
   Capacity: 1
+  oppositeSlot: {fileID: 2076803283}
