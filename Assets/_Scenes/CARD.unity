@@ -270,6 +270,7 @@ MonoBehaviour:
     Deck: {fileID: 2127384715}
     Hand: {fileID: 1071466742}
     Discard: {fileID: 0}
+    commander: {fileID: 843512398}
   DefendingSide:
     CardSlots:
     - {fileID: 0}
@@ -279,6 +280,7 @@ MonoBehaviour:
     Deck: {fileID: 745120474}
     Hand: {fileID: 1446799582}
     Discard: {fileID: 0}
+    commander: {fileID: 1091818349}
   PlayerAreaTransform: {fileID: 1423264569}
   BoardRotationTime: 1.5
   InitialHandSize: 5
@@ -779,6 +781,7 @@ GameObject:
   - component: {fileID: 843512395}
   - component: {fileID: 843512397}
   - component: {fileID: 843512396}
+  - component: {fileID: 843512398}
   m_Layer: 5
   m_Name: Commander
   m_TagString: Untagged
@@ -838,6 +841,18 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 843512394}
   m_CullTransparentMesh: 0
+--- !u!114 &843512398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 843512394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b27741b069349fa9a139ad520fbbd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
 --- !u!1 &1071466736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,6 +1057,7 @@ GameObject:
   - component: {fileID: 1091818346}
   - component: {fileID: 1091818348}
   - component: {fileID: 1091818347}
+  - component: {fileID: 1091818349}
   m_Layer: 5
   m_Name: Commander
   m_TagString: Untagged
@@ -1101,6 +1117,18 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1091818345}
   m_CullTransparentMesh: 0
+--- !u!114 &1091818349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1091818345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b27741b069349fa9a139ad520fbbd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
 --- !u!1 &1263893482
 GameObject:
   m_ObjectHideFlags: 0

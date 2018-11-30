@@ -3,6 +3,7 @@ using UnityEngine;
 public class UnitSlot: Zone {
 
   public UnitSlot oppositeSlot;
+  public Commander opponentCommander;
 
   private void Start() {
     OnClick += UnitSlotClickHandler;
@@ -21,10 +22,13 @@ public class UnitSlot: Zone {
   }
 
   private void UnitSlotClickHandler() {
-      Card myCard = GetUnit();
-      Card oppositeCard = oppositeSlot.GetUnit();
-      if(myCard && oppositeCard) {
-        Debug.Log(string.Format("Card is {0} is attacking card in slot {1}.", name, oppositeSlot.name));
-      }
+    Card myCard = GetUnit();
+    Card oppositeCard = oppositeSlot.GetUnit();
+    if(myCard && oppositeCard) {
+      Debug.Log(string.Format("Card is {0} is attacking card in slot {1}.", name, oppositeSlot.name));
+    }
+    else if(myCard) {
+      opponentCommander.Damage(10);
+    }
   }
 }

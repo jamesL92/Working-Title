@@ -7,10 +7,11 @@ public class CardGameManager: MonoSingleton<CardGameManager> {
   [System.Serializable]
   public struct Side {
     public Player Player;
-    public List<Zone> CardSlots;
+    public List<UnitSlot> CardSlots;
     public Deck Deck;
     public Zone Hand;
     public Zone Discard;
+    public Commander commander;
   }
 
   public int DeckSize;
@@ -34,6 +35,20 @@ public class CardGameManager: MonoSingleton<CardGameManager> {
     playerQueue.Enqueue(DefendingSide.Player);
 
     SetupDecks();
+    AttackingSide.commander.LoadCommander(50);
+    DefendingSide.commander.LoadCommander(50);
+
+    AddCommanderReferenceToZones();
+  }
+
+  private void AddCommanderReferenceToZones()
+  {
+    foreach(UnitSlot slot in AttackingSide.CardSlots) {
+      slot.opponentCommander = DefendingSide.commander;
+    }
+    foreach(UnitSlot slot in DefendingSide.CardSlots) {
+      slot.opponentCommander = AttackingSide.commander;
+    }
   }
 
   void SetupDecks() {
